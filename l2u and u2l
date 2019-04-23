@@ -1,0 +1,26 @@
+Conversion of lowercase to uppercase and vice versa.
+
+%{
+%}
+
+%%
+[a-z]   {printf("%c",yytext[0]-32); }
+[A-Z]   {printf("%c",yytext[0]+32); }
+[ \t\n] ECHO;
+.       ECHO;
+%%
+
+int main(int argc,char **argv)
+{
+  FILE *fp=fopen(argv[1],"r");
+  yyin=fp;
+  yylex();
+  return 0;
+}
+
+-------------------------------------------
+$cat textname
+---type whatever---- 
+
+later call this at ./a.out textname
+-------------------------------------------
